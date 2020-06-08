@@ -4,7 +4,6 @@ import com.thoughtworks.gauge.Step;
 import contants.ContantsLoginPage;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,12 +12,6 @@ import pages.BasePage;
 
 
 public class StepImplementation extends BasePage {
-    public WebDriver driver;
-    public WebDriverWait wait;
-
-    public StepImplementation(WebDriver webDriver) {
-        this.driver = webDriver;
-    }
 
     ContantsLoginPage contantsLoginPage = PageFactory.initElements(driver, ContantsLoginPage.class);
 
@@ -33,8 +26,8 @@ public class StepImplementation extends BasePage {
     @Step("<elementText> elementi tıklanabilir olana kadar bekle.")
     public void waitUntilElementClickable(String elementText) {
         WebElement element = findElement(elementText);
-        wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.elementToBeClickable(element));
+        webDriverWait = new WebDriverWait(driver, 30);
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     @Step("<elementText> elementine tıkla.")
