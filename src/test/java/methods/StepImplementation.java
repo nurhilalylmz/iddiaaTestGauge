@@ -15,6 +15,7 @@ public class StepImplementation extends BasePage {
 
     ContantsLoginPage contantsLoginPage = PageFactory.initElements(driver, ContantsLoginPage.class);
 
+
     public WebElement findElement(String elementText) {
         return contantsLoginPage.getWebElement(elementText);
     }
