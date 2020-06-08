@@ -1,0 +1,9 @@
+Created by YILMAZ on 08.06.2020
+
+This is a concept file with following syntax for each concept.
+# Kullanıcı web sitesi üzerinde başarılı şekilde login olabilmelidir.
+* "phoneNumber" elementine "05349199918" değerini yaz.
+* "password" elementine "qwerty1" değerini yaz.
+* "buttonLogin" elementi tıklanabilir olana kadar bekle.
+* "buttonLogin" elementine tıkla.
+* "https://test.iddiaa.com.tr/" sayfasında olduğunu kontrol et.
