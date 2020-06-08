@@ -13,49 +13,35 @@ import pages.BasePage;
 
 
 public class StepImplementation extends BasePage {
-    protected WebDriver driver;
-    protected WebDriverWait wait;
+    public WebDriver driver;
+    public WebDriverWait wait;
 
     public StepImplementation(WebDriver webDriver) {
         this.driver = webDriver;
     }
-    ContantsLoginPage contantsLoginPage= PageFactory.initElements(driver, ContantsLoginPage.class);
 
-    protected WebElement findElement(String elementText){
-       return contantsLoginPage.getWebElement(elementText);
+    ContantsLoginPage contantsLoginPage = PageFactory.initElements(driver, ContantsLoginPage.class);
+
+    public WebElement findElement(String elementText) {
+        return contantsLoginPage.getWebElement(elementText);
     }
 
-    protected void logMessage(String text) {
+    public void logMessage(String text) {
         System.out.println(text);
     }
 
-    @Step("<elementText> elementine <text> değerini yaz.")
-    protected void writeText(String elementText, String text) {
-        WebElement element = null;
-        try {
-            element=findElement(elementText);
-            if (element.getText().equals("")) {
-                element.sendKeys(Keys.CONTROL, "a", Keys.DELETE);
-            }
-            element.sendKeys(text);
-
-        } catch (Exception e) {
-            logMessage("İlgili elemente yazı yazılırken hata oluştu. Element:" + element.getText() + "Hata: " + e.getMessage());
-        }
-    }
-
     @Step("<elementText> elementi tıklanabilir olana kadar bekle.")
-    protected void waitUntilElementClickable(String elementText) {
+    public void waitUntilElementClickable(String elementText) {
         WebElement element = findElement(elementText);
         wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     @Step("<elementText> elementine tıkla.")
-    protected void clickElement(String elementText) {
+    public void clickElement(String elementText) {
         WebElement element = null;
         try {
-            element=findElement(elementText);
+            element = findElement(elementText);
             element.click();
             waitSeconds(1);
             logMessage(element.getText() + " elementine tıklandı.");
@@ -65,7 +51,7 @@ public class StepImplementation extends BasePage {
 
     }
 
-    protected void waitSeconds(int seconds) {
+    public void waitSeconds(int seconds) {
         try {
             logMessage(seconds + " saniye kadar bekleniyor.");
             Thread.sleep(seconds * 1000);
@@ -75,7 +61,7 @@ public class StepImplementation extends BasePage {
     }
 
     @Step("<expectedUrl> sayfasında olduğunu kontrol et.")
-    protected void controlCurrentPageURL(String expectedUrl) {
+    public void controlCurrentPageURL(String expectedUrl) {
         try {
             if (!expectedUrl.isEmpty()) {
                 if (expectedUrl.equals(driver.getCurrentUrl())) {
@@ -86,5 +72,20 @@ public class StepImplementation extends BasePage {
             logMessage("Sayfa kontrolü yapılırken hata alındı. Hata : " + e.getMessage());
         }
 
+    }
+
+    @Step("<elementText> elementine <text> değerini yaz.")
+    public void writeText(String elementText, String text) {
+        WebElement element = null;
+        try {
+            element = findElement(elementText);
+            if (element.getText().equals("")) {
+                element.sendKeys(Keys.CONTROL, "a", Keys.DELETE);
+            }
+            element.sendKeys(text);
+
+        } catch (Exception e) {
+            logMessage("İlgili elemente yazı yazılırken hata oluştu. Element:" + element.getText() + "Hata: " + e.getMessage());
+        }
     }
 }
